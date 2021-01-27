@@ -10,12 +10,12 @@ import io.ktor.request.*
 import io.ktor.response.*
 import io.ktor.routing.*
 
-fun Route.loginRoute(){
-    route("/login"){
+fun Route.loginRoute() {
+    route("/login") {
         post {
-            val request = try{
+            val request = try {
                 call.receive<AccountRequest>()
-            }catch (e: ContentTransformationException){
+            } catch (e: ContentTransformationException) {
                 call.respond(HttpStatusCode.BadRequest)
                 return@post
             }
