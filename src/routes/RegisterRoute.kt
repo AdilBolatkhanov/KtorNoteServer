@@ -7,7 +7,6 @@ import com.ad.data.registerUser
 import com.ad.data.requests.AccountRequest
 import com.ad.data.responses.SimpleResponse
 import io.ktor.application.*
-import io.ktor.features.*
 import io.ktor.features.ContentTransformationException
 import io.ktor.http.*
 import io.ktor.request.*

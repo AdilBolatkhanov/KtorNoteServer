@@ -2,6 +2,7 @@ package com.ad
 
 import com.ad.data.collections.User
 import com.ad.data.registerUser
+import com.ad.routes.loginRoute
 import com.ad.routes.registerRoute
 import io.ktor.application.*
 import io.ktor.features.*
@@ -22,6 +23,7 @@ fun Application.module(testing: Boolean = false) {
     install(CallLogging)
     install(Routing){
         registerRoute()
+        loginRoute()
     }
 
     install(ContentNegotiation){
