@@ -10,11 +10,12 @@ import io.ktor.routing.*
 fun Route.noteRoutes() {
     route("/getNotes") {
         authenticate {
-            get{
+            get {
                 val email = call.principal<UserIdPrincipal>()!!.name
 
                 val notes = getNotesForUser(email)
                 call.respond(HttpStatusCode.OK, notes)
+                return@get
             }
         }
     }

@@ -24,7 +24,7 @@ fun Application.module(testing: Boolean = false) {
         }
     }
 
-    install(Authentication){
+    install(Authentication) {
         configureAuth()
     }
 
@@ -35,15 +35,15 @@ fun Application.module(testing: Boolean = false) {
     }
 }
 
-private fun Authentication.Configuration.configureAuth(){
-    basic{
+private fun Authentication.Configuration.configureAuth() {
+    basic {
         realm = "Note Server"
         validate { credentials ->
             val email = credentials.name
             val password = credentials.password
-            if (checkPasswordForEmail(email, password)){
+            if (checkPasswordForEmail(email, password)) {
                 UserIdPrincipal(email)
-            }else null
+            } else null
         }
     }
 
