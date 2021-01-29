@@ -60,10 +60,3 @@ suspend fun addOwnerToNote(noteId: String, owner: String): Boolean {
     val owners = notes.findOneById(noteId)?.owners ?: return false
     return notes.updateOneById(noteId, setValue(Note::owners, owners + owner)).wasAcknowledged()
 }
-
-
-
-
-
-
-

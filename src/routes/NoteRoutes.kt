@@ -13,21 +13,17 @@ import io.ktor.response.*
 import io.ktor.routing.*
 
 fun Route.noteRoutes() {
-    route("/getNotes") {
+    route("/note") {
         authenticate {
-            get {
+
+            get("getAll") {
                 val email = call.principal<UserIdPrincipal>()!!.name
 
                 val notes = getNotesForUser(email)
                 call.respond(HttpStatusCode.OK, notes)
-                return@get
             }
-        }
-    }
 
-    route("/addOwnerToNote") {
-        authenticate {
-            post {
+            post("addOwner") {
                 val request = try {
                     call.receive<AddOwnerRequest>()
                 } catch (e: ContentTransformationException) {
@@ -59,30 +55,22 @@ fun Route.noteRoutes() {
                     call.respond(HttpStatusCode.Conflict)
                 }
             }
-        }
-    }
 
-    route("/deleteNote") {
-        authenticate {
-            post {
+            delete("delete") {
                 val email = call.principal<UserIdPrincipal>()!!.name
                 val request = try {
                     call.receive<DeleteNoteRequest>()
                 } catch (e: ContentTransformationException) {
                     call.respond(HttpStatusCode.BadRequest)
-                    return@post
+                    return@delete
                 }
                 if (deleteNoteForUser(email, request.id))
                     call.respond(HttpStatusCode.OK)
                 else
                     call.respond(HttpStatusCode.Conflict)
             }
-        }
-    }
 
-    route("/addNote") {
-        authenticate {
-            post {
+            post("add") {
                 val note = try {
                     call.receive<Note>()
                 } catch (e: ContentTransformationException) {
