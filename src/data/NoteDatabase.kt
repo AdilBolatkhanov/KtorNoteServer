@@ -44,8 +44,8 @@ suspend fun deleteNoteForUser(email: String, noteId: String): Boolean {
         if (note.owners.size > 1) {
             //the note has multiple owners, so we just delete email from owners list
             val newOwners = note.owners - email
-            val updateResut = notes.updateOne(Note::id eq note.id, setValue(Note::owners, newOwners))
-            return updateResut.wasAcknowledged()
+            val updateResult = notes.updateOne(Note::id eq note.id, setValue(Note::owners, newOwners))
+            return updateResult.wasAcknowledged()
         }
         return notes.deleteOneById(note.id).wasAcknowledged()
     } ?: return false
