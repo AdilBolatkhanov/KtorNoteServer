@@ -2,6 +2,8 @@ package com.ad.data
 
 import com.ad.data.collections.Note
 import com.ad.data.collections.User
+import kotlinx.coroutines.flow.mapNotNull
+import kotlinx.coroutines.flow.toList
 import org.litote.kmongo.contains
 import org.litote.kmongo.coroutine.coroutine
 import org.litote.kmongo.eq
@@ -27,7 +29,9 @@ suspend fun checkPasswordForEmail(email: String, passwordToCheck: String): Boole
 }
 
 suspend fun getNotesForUser(email: String): List<Note> {
-    return notes.find(Note::owners contains email).toList()
+    return notes.find(Note::owners contains email).toFlow().mapNotNull {
+        it
+    }.toList(mutableListOf<Note>())
 }
 
 suspend fun saveNote(note: Note): Boolean {

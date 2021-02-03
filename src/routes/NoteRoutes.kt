@@ -16,11 +16,12 @@ fun Route.noteRoutes() {
     route("/note") {
         authenticate {
 
-            get("getAll") {
+            get("get") {
                 val email = call.principal<UserIdPrincipal>()!!.name
 
                 val notes = getNotesForUser(email)
                 call.respond(HttpStatusCode.OK, notes)
+                return@get
             }
 
             post("addOwner") {
