@@ -3,6 +3,7 @@ package com.ad.data
 import com.ad.data.collections.Note
 import com.ad.data.collections.User
 import com.ad.security.checkHashForPassword
+import com.ad.util.Constants.MONGODB_URI
 import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.flow.toList
 import org.litote.kmongo.contains
@@ -11,7 +12,7 @@ import org.litote.kmongo.eq
 import org.litote.kmongo.reactivestreams.KMongo
 import org.litote.kmongo.setValue
 
-private val client = KMongo.createClient().coroutine
+private val client = KMongo.createClient(System.getenv(MONGODB_URI)).coroutine
 private val database = client.getDatabase("NotesDatabase")
 private val users = database.getCollection<User>()
 private val notes = database.getCollection<Note>()
