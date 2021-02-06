@@ -1,0 +1,1 @@
+web: ./build/install/KtorNoteServer/bin/KtorNoteServer
