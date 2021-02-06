@@ -2,6 +2,7 @@ package com.ad.data
 
 import com.ad.data.collections.Note
 import com.ad.data.collections.User
+import com.ad.security.checkHashForPassword
 import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.flow.toList
 import org.litote.kmongo.contains
@@ -25,7 +26,7 @@ suspend fun checkIfUserExists(email: String): Boolean {
 
 suspend fun checkPasswordForEmail(email: String, passwordToCheck: String): Boolean {
     val actualPassword = users.findOne(User::email eq email)?.password ?: return false
-    return actualPassword == passwordToCheck
+    return checkHashForPassword(passwordToCheck, actualPassword)
 }
 
 suspend fun getNotesForUser(email: String): List<Note> {
