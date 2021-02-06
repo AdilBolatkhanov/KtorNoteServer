@@ -1,0 +1,12 @@
+{
+  "name": "Ktor Note Server",
+  "description": "A simple Restful service with MongoDB",
+  "image": "heroku/java",
+  "addons": [],
+  "env": {
+    "MONGODB_URI": {
+      "description": "The Mongodb Uri",
+      "value": "mongodb+srv://adil:9ahBYNdNKimxMZGH@noteserver.feohb.mongodb.net/NotesDatabase?retryWrites=true&w=majority"
+    }
+  }
+}
