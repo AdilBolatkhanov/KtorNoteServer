@@ -1,1 +1,1 @@
-web: ./build/install/KtorNoteServer/bin/KtorNoteServer
+web: ./build/install/note-server/bin/note-server
